@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "The absolute path of the current working directory is : $(pwd)"
+ 0-current_working_directory
