@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# This script displays different messages for specific numbers in the loop
+
+# Set a counter variable to track the number of iterations
+counter=1
+
+# Using a while loop with a case statement to display messages
+while [ $counter -le 20 ]; do
+    case $counter in
+        4)
+            echo "$counter"
+            echo "bad luck from China"
+            ;;
+        9)
+            echo "$counter"
+            echo "bad luck from Japan"
+            ;;
+        17)
+            echo "$counter"
+            echo "bad luck from Italy"
+            ;;
+        *)
+            echo "$counter"
+            ;;
+    esac
+
+    ((counter++))
+done
