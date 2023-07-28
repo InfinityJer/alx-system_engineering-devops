@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# This script tells the story of users from /etc/passwd
+
+# Using IFS (internal field separator) to split lines based on colon (:)
+IFS=":"
+
+# Using a while loop to read the lines from /etc/passwd
+while read -r username _ uid _ _ home_dir command; do
+    # Display the story for each user
+    echo "The user $username is part of the $uid gang, lives in $home_dir and rides $command. $uid's place is protected by the passcode x, more info about the user here: $username"
+done < /etc/passwd
