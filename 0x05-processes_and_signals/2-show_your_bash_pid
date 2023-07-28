@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Bash script that displays lines containing the word "bash"
+# to get the PID of your Bash process.
+# Ignore shellcheck error for the command substitution
+# that will be used to filter the desired lines.
+# shellcheck disable=SC2009
+# Using ps command to list all processes and filtering lines containing "bash"
+ps aux | grep bash | grep -v grep
