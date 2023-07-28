@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Bash script that manages the manage_my_process script
+
 PID_FILE="/var/run/my_process.pid"
+
 start_process() {
     if [ -f "$PID_FILE" ]; then
         echo "manage_my_process is already running. PID: $(cat $PID_FILE)"
@@ -10,6 +12,7 @@ start_process() {
         echo "manage_my_process started"
     fi
 }
+
 stop_process() {
     if [ -f "$PID_FILE" ]; then
         pid=$(cat "$PID_FILE")
@@ -20,6 +23,7 @@ stop_process() {
         echo "manage_my_process is not running."
     fi
 }
+
 restart_process() {
     stop_process
     start_process
