@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Display listening TCP and UDP ports with PID and program name
+
+echo "Active Internet connections (only servers)"
+netstat -tuln | grep 'LISTEN' | awk '{print $1, $4, $NF}' | sed -e 's/:::/[::]/' | sed -e 's/.*://' | sort | uniq
+
+echo "Active UNIX domain sockets (only servers)"
+netstat -lx | grep 'LISTEN' | awk '{print $1, $2, $NF}' | sort | uniq
