@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-
+# Displays all active IPv4 IPs on the machine executed
 # Use 'ifconfig' command to get active IPv4 addresses, filter out loopback and inactive addresses
-ifconfig | grep -oE 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | awk '{print $2}'
+ifconfig | grep -o "inet [^ ]*" | cut -d ":" -f2 | cut -d " " -f2
