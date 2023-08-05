@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Configures an Ubuntu Server with requirements
 # Change localhost resolution to 127.0.0.2 in the hosts file
 # Change facebook.com resolution to 8.8.8.8 in the hosts file
 cp /etc/hosts ~/hosts.new
