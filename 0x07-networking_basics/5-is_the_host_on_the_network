@@ -1,18 +1,14 @@
 #!/usr/bin/env bash
-
 # Function to display usage message
 display_usage() {
     echo "Usage: $0 {IP_ADDRESS}"
 }
-
 # Check if an IP address is provided as an argument
 if [ $# -ne 1 ]; then
     display_usage
     exit 1
 fi
-
 # Get the IP address from the argument
 ip_address=$1
-
 # Ping the IP address 5 times and display the results
 ping -c 5 "$ip_address"
