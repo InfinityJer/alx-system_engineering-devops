@@ -162,4 +162,4 @@ Please practice patience as hydra tries every password in the file until it find
 ```
 
 ### More Reference material
-(Attack is the best defense: Password cracking with Network Sniffing and Dictionary Attack)[https://medium.com/@polalekan/attack-is-the-best-defense-password-cracking-with-network-sniffing-and-dictionary-attack-72fbbf0aa272]
+[Attack is the best defense: Password cracking with Network Sniffing and Dictionary Attack](https://medium.com/@polalekan/attack-is-the-best-defense-password-cracking-with-network-sniffing-and-dictionary-attack-72fbbf0aa272)
