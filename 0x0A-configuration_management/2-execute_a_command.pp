@@ -1,4 +1,4 @@
-# Create a manifest that kills a process named killmenow.
+# Creates a manifest that kills a process named killmenow.
 
 
 exec { 'killmenow':
