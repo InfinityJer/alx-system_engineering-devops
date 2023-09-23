@@ -1,7 +1,7 @@
 # SSH client configuration
 
 # Host directive for your server
-Host school
+Host *
     HostName 35.153.19.92
     User ubuntu
     IdentityFile ~/.ssh/school
