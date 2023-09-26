@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Install Nginx web server
+apt-get update -y
+apt-get install nginx -y
+
+# Create a custom HTML page with "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Ensure Nginx is listening on port 80
+sed -i '/listen 80 default_server;/c\listen 80;' /etc/nginx/sites-available/default
+
+# Restart Nginx to apply changes (you can't use systemctl)
+service nginx restart
