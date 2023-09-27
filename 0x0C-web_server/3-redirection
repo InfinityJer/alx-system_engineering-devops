@@ -1,0 +1,16 @@
+nstall Nginx if not already installed
+if ! dpkg -l | grep -q nginx; then
+    apt-get update -y
+    apt-get install nginx -y
+fi
+
+# Create a custom HTML page with the 301 redirect
+echo -e "location /redirect_me {\n    return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n}" | sudo tee /etc/nginx/sites-available/redirect_me > /dev/null
+ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
+
+# Ensure Nginx is listening on port 80
+sed -i "/listen 80 default_server;/c\listen 80;" /etc/nginx/sites-available/default
+
+# Restart Nginx to apply changes
+service nginx restart
+
