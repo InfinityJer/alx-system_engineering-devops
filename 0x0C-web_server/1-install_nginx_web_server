@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install Nginx web server
+# Installs nginx server and stores content in index
 sudo apt-get -y update
 sudo apt-get -y install nginx
 ufw allow 'Nginx HTTP'
