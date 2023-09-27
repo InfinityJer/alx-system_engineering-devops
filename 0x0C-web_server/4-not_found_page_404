@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
-
 # Install Nginx if not already installed
-if ! dpkg -l | grep -q nginx; then
-    apt-get update -y
-    apt-get install nginx -y
-fi
+# Configures new Ubuntu machine to respect above requirements
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 
-# Create a custom HTML page for the 404 error
-echo -e '<!DOCTYPE html>\n<html>\n<head><title>404 Not Found</title></head>\n<body>\n<h1>404 Not Found</h1>\n<p>Ceci n\'est pas une page</p>\n</body>\n</html>' | sudo tee /var/www/html/404.html > /dev/null
+# code to redirect to YouTube site (Ex. redirect_me to www.youtube.com)
+echo 'Hello World!' | sudo tee /var/www/html/index.html
+newString="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch\?v=QH2-TGUlwu4 permanent;"
+sudo sed -i "s/server_name _;/$newString/" /etc/nginx/sites-enabled/default
 
 # Configure Nginx to use the custom 404 page
-echo -e "error_page 404 /404.html;\nlocation = /404.html {\n    internal;\n}" | sudo tee /etc/nginx/sites-available/custom_404 > /dev/null
-ln -s /etc/nginx/sites-available/custom_404 /etc/nginx/sites-enabled/
-
-# Ensure Nginx is listening on port 80
-sed -i '/listen 80 default_server;/c\listen 80;' /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+newStringTwo="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$newStringTwo/" /etc/nginx/sites-enabled/default
 
 # Restart Nginx to apply changes
-service nginx restart
+sudo service nginx restart
