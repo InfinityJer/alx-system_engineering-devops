@@ -2,4 +2,4 @@
 # This script generates an RSA key pair
 
 # Generate the RSA key pair with 4096 bits and the provided passphrase
-ssh-keygen -f school -b 4096 -N 'betty' -t rsa
+ssh-keygen -t rsa -b 4096 -P betty -f school
