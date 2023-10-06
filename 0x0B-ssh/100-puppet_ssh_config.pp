@@ -1,5 +1,6 @@
 # Puppet manifest to configure SSH client
 # Ensure the SSH client configuration file exists
+
 file_line { 'replace passwordAuthentication':
     ensure  => 'present',
     path    => '/etc/ssh/ssh_config',
