@@ -1,19 +1,25 @@
 #!/usr/bin/env bash
+#Customizes a 404 page
+
 # Install Nginx if not already installed
-# Configures new Ubuntu machine to respect above requirements
 sudo apt-get update
 sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
 
-# code to redirect to YouTube site (Ex. redirect_me to www.youtube.com)
-echo 'Hello World!' | sudo tee /var/www/html/index.html
-newString="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch\?v=QH2-TGUlwu4 permanent;"
-sudo sed -i "s/server_name _;/$newString/" /etc/nginx/sites-enabled/default
+# Creating an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# Configure Nginx to use the custom 404 page
+# code to redire https://github.com/InfinityJer permanently
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/InfinityJer permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# Creating a 404 Custom error page
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-newStringTwo="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-sudo sed -i "s/listen 80 default_server;/$newStringTwo/" /etc/nginx/sites-enabled/default
+new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
 
-# Restart Nginx to apply changes
+sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
+
+# Testing configurations for syntax errors
+sudo nginx -t
+
+# restart the server
 sudo service nginx restart
