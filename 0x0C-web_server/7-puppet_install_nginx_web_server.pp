@@ -1,20 +1,22 @@
-# Install Nginx package with puppet 
+# Automating task requirements using Puppet
+# Install Nginx package with puppet
+
 package { 'nginx':
-  ensure => 'installed',
+  ensure => installed,
 }
 
-# Create a custom HTML page with "Hello World!"
+file_line { 'install':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-enabled/default',
+  after  => 'listen 80 default_server;',
+  line   => 'rewrite ^/redirect_me https://www.github.com/InfinityJer permanent;',
+}
+
 file { '/var/www/html/index.html':
-  ensure  => 'file',
   content => 'Hello World!',
+}
+
+service { 'nginx':
+  ensure  => running,
   require => Package['nginx'],
-}
-
-exec { 'append_redirect_me':
-  command => "/usr/bin/sed -i '/^}$/i \\\n\tlocation \\/redirect_me {return 301 https:\\/\\/www.youtube.com\\/watch?v=QH2-TGUlwu4;}' /etc/nginx/sites-available/default",
-}
-
-exec {'run':
-  command  => 'sudo service nginx restart',
-  provider => shell,
 }

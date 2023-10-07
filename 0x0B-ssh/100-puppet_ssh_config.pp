@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Puppet manifest to configure SSH client
 # Ensure the SSH client configuration file exists
 
