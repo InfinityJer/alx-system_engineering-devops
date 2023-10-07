@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 # Installs nginx server and stores content in index
-sudo apt-get -y update
+
+# Updating Packages before making Installations
+sudo apt-get update
 sudo apt-get -y install nginx
-ufw allow 'Nginx HTTP'
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-sudo service nginx start
+
+# Configuring the Uncomplicated Firewall (UFW) to allow incoming traffic for the Nginx HTTP service
+sudo ufw allow 'Nginx HTTP'
+
+# Creating an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+#testing nginx configuration
+sudo nginx -t
+
+# Restarting Nginx
+sudo service nginx reload
