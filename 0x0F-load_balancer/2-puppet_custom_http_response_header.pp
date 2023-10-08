@@ -1,25 +1,29 @@
 # Puppet manifest to add a custom HTTP header (X-Served-By) to Nginx
 
-# Define a custom fact to retrieve the server's hostname
-Facter.add(:custom_hostname) do
-  setcode 'hostname'
-end
-
-# Install Nginx package
+# update ubuntu server
+exec { 'update server':
+  command  => 'apt-get update',
+  user     => 'root',
+  provider => 'shell',
+}
+->
+# install nginx web server on server
 package { 'nginx':
-  ensure => 'installed',
+  ensure   => present,
+  provider => 'apt'
 }
-
-# Create a custom Nginx configuration file for the custom header
-file { '/etc/nginx/conf.d/custom_header.conf':
-  ensure  => 'present',
-  content => "server_tokens off;\nmore_set_headers 'X-Served-By: ${custom_hostname}';\n",
-  notify  => Service['nginx'],
+->
+# custom Nginx response header (X-Served-By: hostname)
+file_line { 'add HTTP header':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => 'add_header X-Served-By $hostname;'
 }
-
-# Ensure Nginx service is running and enabled
+->
+# start service
 service { 'nginx':
   ensure  => 'running',
   enable  => true,
-  require => File['/etc/nginx/conf.d/custom_header.conf'],
+  require => Package['nginx']
 }
