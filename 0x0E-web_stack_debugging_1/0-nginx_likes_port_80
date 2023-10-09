@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# script that restores the default server port
+# Port 8080 is used by the /etc/nginx/sites-enabled/default.
+# Rather than http, this is for a proxy server.
+
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx start
