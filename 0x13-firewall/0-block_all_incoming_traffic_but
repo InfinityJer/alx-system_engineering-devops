@@ -1,25 +1,26 @@
-# Check the status of ufw to make sure it is active by running:
+# Install UFW if it's not already installed
+sudo apt-get update
+sudo apt-get install ufw
 
+# Check the status of ufw to make sure it is active by running:
 sudo ufw status
 
-# If ufw is not active, you can enable it by running:
-suo ufw enable
-
-# Set the default incoming policy to "deny" to block all incoming traffic by running:
+# Set default rules to deny all incoming traffic and allow all outgoing traffic:
 sudo ufw default deny incomming
-
-# Set the default outgoing policy to "allow" to allow  all outgoing traffic by running:
 sudo ufw default allow outgoing
 
-# Allow incoming traffic on TCP ports 22, 443, and 80 by running:
+# Allow incoming traffic on ports 22 (SSH), 80 (HTTP), and 443 (HTTPS):
 
 sudo ufw allow 22/tcp
 sudo ufw allow 443/tcp
 sudo ufw allow 80/tcp
 
+# If ufw is not active, you can enable it by running:
+suo ufw enable
+
 # Verify that the rules have been added by running:
 
 sudo ufw show added
 
-# Finally, enable ufw by running:
-sudo ufw enable
+# Check the status of UFW to confirm the rules:
+sudo ufw status
