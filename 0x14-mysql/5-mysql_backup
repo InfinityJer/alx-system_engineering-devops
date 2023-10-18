@@ -1,13 +1,8 @@
 #!/bin/bash
-
-# Create a variable for the current date in the desired format
-CURRENT_DATE=$(date +'%d-%m-%Y')
+# Bash scrit to archive all MySQL DATABASE with the help of mysqldump and tar 
 
 # Create the MySQL dump
-mysqldump -u root -p$1 --all-databases > backup.sql
+mysqldump -uroot -p"$1" --all-databases > backup.sql
 
-# Create a compressed archive
-tar -czvf "$CURRENT_DATE.tar.gz" backup.sql
-
-# Clean up the generated SQL file
-rm backup.sql
+# Create a compressed archive with current date in the desired format
+tar -cvzf "$(date +%d-%m-%Y)".tar.gz backup.sql
