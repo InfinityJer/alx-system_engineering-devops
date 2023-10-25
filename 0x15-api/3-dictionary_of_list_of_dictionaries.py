@@ -18,7 +18,8 @@ if __name__ == "__main__":
         for user in users:
             employee_id = user.get('id')
             employee_name = user.get('username')
-            tasks = [task for task in todos if task.get('userId') == employee_id]
+            tasks = [task for task in todos if task.get('userId') ==
+                     employee_id]
             data[employee_id] = []
             for task in tasks:
                 data[employee_id].append({
