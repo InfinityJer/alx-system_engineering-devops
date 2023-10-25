@@ -18,7 +18,7 @@ if __name__ == "__main__":
     todos_response = requests.get(f'{base_url}/todos?userId={employee_id}')
 
     try:
-        employee_name = user_response.json()[0].get('name')
+        employee_name = user_response.json().get('name')
         todos = todos_response.json()
         total_tasks = len(todos)
         done_tasks = [task for task in todos if task.get('completed')]
@@ -27,7 +27,7 @@ if __name__ == "__main__":
         print(f"Employee {employee_name} is done with tasks"
               f"({num_done_tasks}/{total_tasks}):")
         for task in done_tasks:
-            print(f"\t {task.get('title')}")
+            print(f"\t{task.get('title')}")
 
     except Exception as e:
         print(f"Error: {e}")
