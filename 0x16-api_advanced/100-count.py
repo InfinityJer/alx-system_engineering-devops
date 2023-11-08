@@ -4,6 +4,7 @@
 """
 import requests
 
+
 def count_words(subreddit, word_list, word_count=None, after=None):
     if word_count is None:
         word_count = {word: 0 for word in word_list}
