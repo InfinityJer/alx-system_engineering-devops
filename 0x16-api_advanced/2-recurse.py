@@ -7,8 +7,7 @@ import requests
 
 def recurse(subreddit, hot_list=[], after=None):
     headers = {'User-Agent': 'MyBot/0.0.1'}
-    url = 'https://www.reddit.com/r/' + subreddit +
-    '/hot.json?limit=100&after=' + str(after)
+    url = 'https://www.reddit.com/r/' + subreddit + '/hot.json?limit=100&after=' + str(after)
     response = requests.get(url, headers=headers, allow_redirects=False)
 
     if response.status_code == 200:
