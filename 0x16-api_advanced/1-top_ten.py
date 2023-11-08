@@ -4,6 +4,7 @@
 """
 import requests
 
+
 def top_ten(subreddit):
     headers = {'User-Agent': 'MyBot/0.0.1'}
     url = 'https://www.reddit.com/r/' + subreddit + '/hot.json?limit=10'
