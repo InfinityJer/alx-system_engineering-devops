@@ -1,19 +1,27 @@
 # Puppet Manifest for changing OS configuration for the holberton user
 
-exec { 'change-os-configuration-for-holberton-user':
-  command => '/bin/echo "* - nofile 65536" >> /etc/security/limits.conf',
-  onlyif  => '/bin/grep -q "^*.*65536" /etc/security/limits.conf',
-  path    => '/bin:/sbin:/usr/bin:/usr/sbin',
+# Increase hard file limit for user holberton
+exec { 'increase-hard-file-limit-for-holberton-user':
+  command => 'sed -i "/holberton hard/s/5/50000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/',
 }
 
-exec { 'change-ulimit-for-holberton-user':
-  command => '/bin/echo "ulimit -n 65536" >> /home/holberton/.bashrc',
-  onlyif  => '/bin/grep -q "^ulimit -n 65536" /home/holberton/.bashrc',
-  path    => '/bin:/sbin:/usr/bin:/usr/sbin',
+# Increase soft file limit for user holberton
+exec { 'increase-soft-file-limit-for-holberton-user':
+  command => 'sed -i "/holberton soft/s/4/50000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/',
 }
 
-# Restart Nginx
--> exec { 'nginx-restart':
-  command => 'nginx restart',
-  path    => '/etc/init.d/',
+# Ensure the holberton user exists
+user { 'holberton':
+  ensure => 'present',
+  home   => '/home/holberton',
+}
+
+# Ensure the /home/holberton directory exists
+file { '/home/holberton':
+  ensure => 'directory',
+  owner  => 'holberton',
+  group  => 'holberton',
+  mode   => '0755',
 }
