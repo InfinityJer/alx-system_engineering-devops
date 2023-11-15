@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Reloads Gunicorn gracefully without downtime
+
+# Get the process IDs of Gunicorn workers and send HUP signal
+pgrep gunicorn | xargs kill -HUP
+
+# Note: This script assumes that Gunicorn is configured to handle the HUP signal gracefully.
